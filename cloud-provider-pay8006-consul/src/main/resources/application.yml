@@ -1,0 +1,19 @@
+server:
+  port: 8006
+
+spring:
+  application:
+    name: consul-provider-payment
+
+  #consul 注册中心配置
+  cloud:
+    consul:
+      host: 192.168.68.132
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        #心跳检测间隔时间
+        health-check-interval: 3600s
+        #打开心跳机制
+        heartbeat:
+          enabled: true
