@@ -13,6 +13,7 @@
 
     <dependencies>
         <!-- 服务注册中心（eureka）的客户端 eureka-client -->
+        <!-- 注意：eureka-client依赖中自带ribbon依赖 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
