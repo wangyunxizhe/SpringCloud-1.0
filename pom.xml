@@ -22,6 +22,9 @@
         <module>cloud-consumer-order80-consul</module>
         <module>cloud-consumer-order80-openfeign</module>
         <module>cloud-provider-pay8008-hystrix</module>
+        <module>cloud-consumer-order80-openfeign-hystrix</module>
+        <module>cloud-consumer-9001-hystrix-dashboard</module>
+        <module>cloud-consumer-9090-hystrix-dashboard</module>
     </modules>
 
     <!--统一管理jar包版本-->
