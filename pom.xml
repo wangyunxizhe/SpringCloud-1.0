@@ -25,6 +25,7 @@
         <module>cloud-consumer-order80-openfeign-hystrix</module>
         <module>cloud-consumer-9001-hystrix-dashboard</module>
         <module>cloud-consumer-9090-hystrix-dashboard</module>
+        <module>cloud-gateway-gateway9527</module>
     </modules>
 
     <!--统一管理jar包版本-->
