@@ -20,6 +20,12 @@ spring:
       profile: dev
       #上述综合起来 === http://localhost:3344/master/config-dev.yml
       uri: http://localhost:3344
+  #rabbitmq相关配置（这里用于接收Bus消息总线的消息）实时更新配置（这里与3344不同，这里只加连接信息）
+  rabbitmq:
+    host: 192.168.68.132
+    port: 5672
+    username: guest
+    password: guest
 
 eureka:
   client:

@@ -17,8 +17,6 @@ public class ConfigClientController {
 
     @GetMapping("/configInfo")
     public String getConfigInfo() {
-        //此处的${config.info}就是3355配置中心里配置的Gitee仓库中的config-xxx.yml中的配置信息
-        //即：直接访问http://localhost:3355/configInfo，就可读到http://localhost:3344/master/config-dev.yml中的config.info的值
         return "serverPort:" + serverPort + "\t\n\n configInfo:" + configInfo;
     }
 

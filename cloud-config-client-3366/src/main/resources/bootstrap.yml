@@ -1,0 +1,35 @@
+#与3355一样，作为配置中心的客户端
+server:
+  port: 3366
+
+spring:
+  application:
+    name: cloud-config-client #注册进Eureka的微服务名
+  cloud:
+    #config客户端配置项
+    config:
+      #Git目标分支
+      label: master
+      #配置文件名称
+      name: config
+      #读取后缀名称
+      profile: dev
+      #上述综合起来 === http://localhost:3344/master/config-dev.yml
+      uri: http://localhost:3344
+  #rabbitmq相关配置（这里用于接收Bus消息总线的消息）实时更新配置（这里与3344不同，这里只加连接信息）
+  rabbitmq:
+    host: 192.168.68.132
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

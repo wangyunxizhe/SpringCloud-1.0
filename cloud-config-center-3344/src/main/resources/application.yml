@@ -19,8 +19,26 @@ spring:
             - springcloud-config
       #读取分支
       label: master
+  #rabbitmq相关配置（这里用于Bus消息总线）
+  rabbitmq:
+    host: 192.168.68.132
+    port: 5672
+    username: guest
+    password: guest
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:7001/eureka
+
+#Bus消息总线RabbitMQ相关配置，暴露bus刷新配置的端点 SpringCloud Bus动态刷新全局广播
+#此配置只在3344服务端添加，由3344收到通知后再去通知下面的客户端
+#原效果：要先分别触发POST "http://IP:3355、3366、。。。/actuator/refresh"，才能让3355、3366、。。。读取到最新的配置
+#现效果：触发POST "http://IP:3344/actuator/bus-refresh"，达到一次发送，处处生效的效果
+#引申：假如现在有4个客户端，现在服务端只想通知某一个客户端更新配置（有点类似灰度场景）
+#可以POST http://IP:3344/actuator/bus-refresh/客户端微服务名:客户端微服务端口（http://IP:3344/actuator/bus-refresh/cloud-config-client:3355）
+management:
+  endpoints: #暴露bus刷新配置的端点
+    web:
+      exposure:
+        include: 'bus-refresh'
