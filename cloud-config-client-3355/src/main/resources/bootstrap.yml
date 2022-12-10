@@ -1,0 +1,40 @@
+#application.yml是用户级配置文件，bootstrap.yml是系统级，优先级更高。对于Client模块，将application改为bootstrap这步很关键，
+#因为客户端需要从Gitee上读取配置中心中的大家都遵循的配置，自己项目的配置优先级要放在统一配置的后面。故客户端使用bootstrap.yml来加载项目的全局配置，
+#而后再使用application.yml来满足自己项目中的配置
+
+#作为配置中心的客户端
+server:
+  port: 3355
+
+spring:
+  application:
+    name: cloud-config-client #注册进Eureka的微服务名
+  cloud:
+    #config客户端配置项
+    config:
+      #Git目标分支
+      label: master
+      #配置文件名称
+      name: config
+      #读取后缀名称
+      profile: dev
+      #上述综合起来 === http://localhost:3344/master/config-dev.yml
+      uri: http://localhost:3344
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+
+#暴露监控端点 否则 curl -X POST "http://localhost:3355/actuator/refresh" 不可使用，结合Controller中的@RefreshScope注解一起使用
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#详解：3355客户端与3344服务端不同点：3344是直连Gitee，所以当Gitee上的配置内容发生变化时，3344可以直接拉取到最新的内容，
+#而3355是通过3344获取到配置，如想先要最新的配置需做以下3步：
+#1，本配置文件中加入上述“management.*”的配置项
+#2，ConfigClientController中加入@RefreshScope注解
+#3（重要）：手动触发curl -X POST "http://localhost:3355/actuator/refresh"请求，相当于激活一下
+#完成上述3步，3355不用重启即可像3344一样获取到Gitee上最新的配置内容

@@ -1,0 +1,26 @@
+#作为配置中心的服务端
+server:
+  port: 3344
+
+spring:
+  application:
+    name: cloud-config-center #注册进Eureka的微服务名
+  cloud:
+    config:
+      server:
+        #通过Gitee读取配置信息，达到N多个微服务配置文件统一管理的效果
+        #启动成功后访问的路径 http://ip:3344/{label}/{application}-{profile}.yml（http://localhost:3344/master/config-dev.yml）
+        #能访问的配置文件里的内容 就表示成功了（Gitee仓库要是开源的才行！！！）
+        git:
+          #Gitee上面的git仓库名字
+          uri: https://gitee.com/y_wang666/sprincloud-config.git
+          #搜索目录
+          search-paths:
+            - springcloud-config
+      #读取分支
+      label: master
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
