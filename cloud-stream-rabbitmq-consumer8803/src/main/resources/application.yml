@@ -1,0 +1,43 @@
+#8803工程模拟RabbitMQ消息的消费者，使用Stream与之绑定
+server:
+  port: 8803
+
+spring:
+  application:
+    name: cloud-stream-consumer
+  rabbitmq:
+    host: 192.168.68.132
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      binders: # 在此处配置要绑定的rabbitmq的服务信息
+        myRabbit: # 表示定义的名称，用于于binding整合
+          type: rabbit # 消息组件类型
+          environment: # 设置rabbitmq的相关的环境配置
+            spring:
+              rabbitmq:
+                host: 192.168.68.132
+                port: 5672
+                username: guest
+                password: guest
+      bindings: # 服务的整合处理
+        input: # 这个名字是一个通道的名称
+          destination: wyExchange # 表示要使用的Exchange名称定义
+          content-type: application/json # 设置消息类型，本次为json，文本则设置“text/plain”
+          binder: myRabbit  # 设置要绑定的消息服务的具体设置
+          #注意：若group不同，则默认会重复消费（若不配置“group”，Stream默认会为每个应用创建不同的group）
+          #如果希望8802，8803中只有一个能消费到消息，也就是不会重复消费，把8802，8803，。。。放在一个group中即可
+          #另外：group属性也可以有效解决消息丢失的问题，当8801发送消息后，8802/8803才上线，如果有group属性，可以消费到8801发送的消息
+          group: wyuanA
+
+eureka:
+  client: # 客户端进行Eureka注册的配置
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 2 # 设置心跳的时间间隔（默认是30秒）
+    lease-expiration-duration-in-seconds: 5 # 如果现在超过了5秒的间隔（默认是90秒）
+    instance-id: receive-8802.com  # 在信息列表时显示主机名称
+    prefer-ip-address: true     # 访问的路径变为IP地址
