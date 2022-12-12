@@ -23,13 +23,11 @@
         <module>cloud-consumer-order80-openfeign</module>
         <module>cloud-provider-pay8008-hystrix</module>
         <module>cloud-consumer-order80-openfeign-hystrix</module>
-        <module>cloud-consumer-9001-hystrix-dashboard</module>
         <module>cloud-consumer-9090-hystrix-dashboard</module>
         <module>cloud-gateway-gateway9527</module>
         <module>cloud-config-center-3344</module>
         <module>cloud-config-client-3355</module>
         <module>cloud-config-client-3366</module>
-        <module>cloud-stream-rabbitmq-provider</module>
         <module>cloud-stream-rabbitmq-provider8801</module>
         <module>cloud-stream-rabbitmq-consumer8802</module>
         <module>cloud-stream-rabbitmq-consumer8803</module>
@@ -61,6 +59,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            
             <!--spring cloud Hoxton.SR1-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -69,6 +68,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!--spring cloud alibaba 2.1.0.RELEASE-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>

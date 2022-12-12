@@ -48,7 +48,7 @@ public class PaymentController {
         }
     }
 
-    //***服务发现接口*** 测试
+    //***服务发现*** 接口测试
     @GetMapping(value = "/payment/discovery")
     public Object discovery() {
         List<String> services = discoveryClient.getServices();
@@ -63,12 +63,13 @@ public class PaymentController {
         return this.discoveryClient;
     }
 
+    //***负载均衡*** 接口测试
     @GetMapping(value = "/payment/lb")
     public String getPaymentLB() {
         return serverPort;
     }
 
-    //模拟接口处理时长3秒，便于消费者调用时测试OpenFeign的超时控制
+    //***openFeign*** 模拟接口处理时长3秒，便于消费者调用时测试OpenFeign的超时控制
     @GetMapping(value = "/payment/feign/timeout")
     public String paymentFeignTimeout() {
         try {
@@ -77,6 +78,12 @@ public class PaymentController {
             e.printStackTrace();
         }
         return serverPort;
+    }
+
+    //***zipkin*** 测试监控微服务调用链路
+    @GetMapping(value = "/payment/zipkin")
+    public String paymentZipkin() {
+        return "触发 paymentZipkin()";
     }
 
 }

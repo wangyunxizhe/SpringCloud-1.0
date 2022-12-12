@@ -12,6 +12,14 @@ spring:
     username: root
     password: 870814
 
+  #zipkin配置：微服务之间调用链路追踪解决方案
+  zipkin:
+    base-url: http://192.168.68.132:9411
+  sleuth:
+    sampler:
+      #采样率值介于0到1之间，1则表示全部采集
+      probability: 1
+
 eureka:
   client:
     #是否将自己注册进eureka-server，默认true
