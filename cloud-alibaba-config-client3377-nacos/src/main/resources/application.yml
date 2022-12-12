@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    #此处配置的dev，对应的是http://192.168.68.131:8848/nacos配置列表中的xxxx-dev/sit/xxx.yaml
+    active: dev
+#    active: sit
+#    active: info

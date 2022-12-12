@@ -1,0 +1,16 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: nacos-order-consumer
+
+  cloud:
+    nacos:
+      discovery:
+        #Nacos地址
+        server-addr: 192.168.68.131:8848
+
+#消费者要访问的微服务名（注册在nacos中的provider名称）
+service-url:
+  nacos-user-service: http://nacos-payment-provider
