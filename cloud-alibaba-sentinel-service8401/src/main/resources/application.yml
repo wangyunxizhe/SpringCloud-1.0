@@ -7,11 +7,11 @@ spring:
   cloud:
     nacos:
       discovery:
-        #Nacos服务注册中心地址
+        #Nacos服务注册中心地址（访问地址：http://192.168.68.132:8848/nacos）
         server-addr: 192.168.68.132:8848
     sentinel:
       transport:
-        #配置Sentinel dashboard地址
+        #配置Sentinel dashboard地址（访问地址：http://192.168.68.132:8080）
         dashboard: 192.168.68.132:8080
         #默认8719端口，若被占用会自动+1扫描，直到没有被占用
         port: 8719
