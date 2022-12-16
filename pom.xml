@@ -39,6 +39,7 @@
         <module>cloud-alibaba-consumer-order84-nacos</module>
         <module>cloud-alibaba-provider-pay9003</module>
         <module>cloud-alibaba-provider-pay9004</module>
+        <module>seata-order-service2001</module>
     </modules>
 
     <!--统一管理jar包版本-->
